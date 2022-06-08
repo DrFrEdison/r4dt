@@ -3,7 +3,7 @@ Type: Package
 Title: R four Dausch Technologies GmbH - Data science and manipulation
 Version: 0.2.0
 Author: Markus Kurtz
-Maintainer: Markus Kurtz - m.kurtz@dausch-technologies.de
+Maintainer: Markus Kurtz <m.kurtz@dausch-technologies.de>
 Description: to come soon
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
