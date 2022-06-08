@@ -1,4 +1,4 @@
-.breakfun <- function(x)
+breakfun <- function(x)
 {
   #p1 <- proc.time()
   Sys.sleep(x)

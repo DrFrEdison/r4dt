@@ -1,9 +1,9 @@
-# .moveme function ####
-.moveme <- function (invec, movecommand) {
-  movecommand <- lapply(strsplit(strsplit(movecommand, ";")[[1]], 
+# moveme function ####
+moveme <- function (invec, movecommand) {
+  movecommand <- lapply(strsplit(strsplit(movecommand, ";")[[1]],
                                  ",|\\s+"), function(x) x[x != ""])
   movelist <- lapply(movecommand, function(x) {
-    Where <- x[which(x %in% c("before", "after", "first", 
+    Where <- x[which(x %in% c("before", "after", "first",
                               "last")):length(x)]
     ToMove <- setdiff(x, Where)
     list(ToMove, Where)

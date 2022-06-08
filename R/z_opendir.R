@@ -1,4 +1,4 @@
-.opendir <- function(dir = getwd()){
+opendir <- function(dir = getwd()){
   if (.Platform['OS.type'] == "windows"){
     shell.exec(dir)
   } else {

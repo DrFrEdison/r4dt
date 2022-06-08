@@ -1,7 +1,7 @@
-.colp <- (c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"))
-.colp <- c(.colp, "springgreen", "bisque3", "violetred1")
+colp <- (c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"))
+colp <- c(colp, "springgreen", "bisque3", "violetred1")
 
-.parusr <- function(position, xx = .15, yy = .2){
+parusr <- function(position, xx = .15, yy = .2){
   if(position == "topleft"){
     x <- par("usr")[1] - diff(par("usr")[1:2]) * xx
     y <- par("usr")[4] + diff(par("usr")[3:4]) * yy
@@ -29,7 +29,7 @@ moving.average.time <- function(ma.dat, ma.time, ma.minutes = 10, ma.n = 5){
   return( ma.dat )
 }
 
-.lg3.status <- function(data){
+lg3.status <- function(data){
 
   lg3.status <- c("diet", "brix", "co2", "conductivity", "FluidPressure", "FluidFlow", "FluidTemperature", "SpectrometerTemperature", "RackTemperature", "AmbientTemperature", "integrationTime", "accumulations")
 

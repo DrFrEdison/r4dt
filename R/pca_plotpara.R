@@ -1,4 +1,4 @@
-.pca.plot <- function(pca.input, limitvalue = 2, ncomp = 1){
+pca.plot <- function(pca.input, limitvalue = 2, ncomp = 1){
   xlimp <- c(0, max(xmax <- max(pca.input$calres$T2[ , ncomp], na.rm = T), xT2 <-  pca.input$T2lim[ limitvalue, ncomp]))
   ylimp <- c(0, max(ymax <- max(pca.input$calres$Q[ , ncomp], na.rm = T), yQ <- pca.input$Qlim[ limitvalue, ncomp]))
   
@@ -29,7 +29,7 @@
   return(returnlist)
 }
 
-.pls.plot <- function(pls.model.input, pls.pred.input, limitvalue = 2, ncomp = pls.model.input$ncomp){
+pls.plot <- function(pls.model.input, pls.pred.input, limitvalue = 2, ncomp = pls.model.input$ncomp){
   xlimp <- c(0, max(xmax <- max(pls.pred.input$T2[ , ncomp], na.rm = T), xT2 <-  pls.model.input$T2lim[ limitvalue, ncomp]))
   ylimp <- c(0, max(ymax <- max(pls.pred.input$Q[ , ncomp], na.rm = T), yQ <- pls.model.input$Qlim[ limitvalue, ncomp]))
   
