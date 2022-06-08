@@ -100,7 +100,7 @@ wd$fe$MEG$Woerth$A3 <- paste0(wd$fe$MEG$Woerth[1],"P110780_LG2_A3/")
 wd$fe$MEG$Woerth$A5 <- paste0(wd$fe$MEG$Woerth[1],"P110280_LG2_A5/")
 wd$fe$MEG$Woerth$A6 <- paste0(wd$fe$MEG$Woerth[1],"P110680_LG2_A6/")
 
-wd$fe$MEG$Loeningen$SG <- paste0(wd$fe$MEG$Loeningen[1],"P105160_SG/")
+wd$fe$MEG$Loeningen$BLT31_32 <- paste0(wd$fe$MEG$Loeningen[1],"P105160_BLT31_32/")
 
 # Pepsi
 wd$fe$Pepsi$Nieder_Roden <- paste0(wd$fe$Pepsi[1], "Nieder_Roden/P110160_L3_PET_CSD/")
@@ -186,7 +186,7 @@ wd$service$MEG$Woerth$A3 <- paste0(wd$service$MEG$Woerth[1],"P110770_LiquiGuard_
 wd$service$MEG$Woerth$A5 <- paste0(wd$service$MEG$Woerth[1],"P110270_LiquiGuard_PEG_Woerth_A5/")
 wd$service$MEG$Woerth$A6 <- paste0(wd$service$MEG$Woerth[1],"P110670_LiquiGuard_PEG_Woerth_A6/")
 
-wd$service$MEG$Loeningen$SG <- paste0(wd$service$MEG$Loeningen[1],"P105160_SyrupGuard/")
+wd$service$MEG$Loeningen$BLT31_32 <- paste0(wd$service$MEG$Loeningen[1],"P105160_SyrupGuard/")
 wd$service$MEG$Loeningen$LG <- paste0(wd$service$MEG$Loeningen[1],"P110060_LiquiGuard/")
 
 wd$service$MEG$Kirkel$LG <- paste0(wd$service$MEG$Kirkel[1],"P111060_KEG_Linie 4/")
@@ -234,7 +234,7 @@ wd$servicebackup$MEG$Woerth$A3 <- paste0(wd$servicebackup$MEG$Woerth[1],"A3/")
 wd$servicebackup$MEG$Woerth$A5 <- paste0(wd$servicebackup$MEG$Woerth[1],"A5/")
 wd$servicebackup$MEG$Woerth$A6 <- paste0(wd$servicebackup$MEG$Woerth[1],"A6/")
 
-wd$servicebackup$MEG$Loeningen$SG <- paste0(wd$servicebackup$MEG$Loeningen[1],"SyrupGuard/")
+wd$servicebackup$MEG$Loeningen$BLT31_32 <- paste0(wd$servicebackup$MEG$Loeningen[1],"BLT31_32/")
 wd$servicebackup$MEG$Loeningen$LG_LOE <- paste0(wd$servicebackup$MEG$Loeningen[1],"LG100i/")
 
 wd$servicebackup$MEG$Kirkel$A4 <- paste0(wd$servicebackup$MEG$Kirkel[1],"A4/")
