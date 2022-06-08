@@ -1,5 +1,5 @@
 # LG2 read and merge csv files ####
-read.csv.LG2 <- function(customer
+read_csv_LG2 <- function(customer
                          , location
                          , unit
                          , firstday
