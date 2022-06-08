@@ -29,7 +29,7 @@ model_opt_lab_lin_prod_match <- function(lab_date, lab_para
     lab_para[[i]] <- lab_para[[i]][which(lapply(match_subdat[[i]], length) != 0)]
 
     subdat[[i]] <- prod_data[[i]][sort(unique(unlist(match_subdat[[i]]))) , ]
-    subdat[[i]] <- .transfer_csv(csv.file = subdat[[i]])
+    subdat[[i]] <- transfer_csv(csv.file = subdat[[i]])
 
     if(LG3_time[[i]] >= LG3_timerange[[i]])
       match_subdatx[[i]] <- lapply(lab_date[[i]], function(x) which( subdat[[i]]$data$datetime >= (x - LG3_time[[i]] - LG3_timerange[[i]] ) &
