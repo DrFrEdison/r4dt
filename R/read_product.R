@@ -4,14 +4,16 @@ stop_quietly <- function() {
   stop()
 }
 
-customer.location.by.line <- function(line, customer.list = dt$customerlist){
-  customer.list.sub <- customer.list[customer.list$line == line,]
+customer.location.by.line <- function(line, customer.list){
 
-  returnlist <- list(customer = customer.list.sub$customer
+  rowp <- which( customer.list$line == line )
+  customer.list.sub <- customer.list[ rowp ,]
+
+  customer.list.sub <- list(customer = customer.list.sub$customer
                      , LG = customer.list.sub$LG
                      , location = customer.list.sub$location
                      , line = customer.list.sub$line)
-  return(returnlist)
+  return(customer.list.sub)
 }
 
 customer.location.line.productID <- function(customer, location, line, product_ID){
