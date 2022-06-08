@@ -12,7 +12,7 @@ LazyData: true
 URL: https://github.com/DrFrEdison/r4dt
 BugReports: https://github.com/DrFrEdison/r4dt/issues
 Depends: 
-    R (>= 3.50)
+    R (>= 3.50),
     anytime,
     audio,
     chron,
