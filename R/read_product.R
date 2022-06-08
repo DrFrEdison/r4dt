@@ -5,12 +5,12 @@ stop_quietly <- function() {
 }
 
 customer.location.by.line <- function(line, customer.list = dt$customerlist){
-  customer.list <- customer.list[customer.list$line == line,]
+  customer.list.sub <- customer.list[customer.list$line == line,]
 
-  returnlist <- list(customer = customer.list$customer
-                     , LG = customer.list$LG
-                     , location = customer.list$location
-                     , line = customer.list$line)
+  returnlist <- list(customer = customer.list.sub$customer
+                     , LG = customer.list.sub$LG
+                     , location = customer.list.sub$location
+                     , line = customer.list.sub$line)
   return(returnlist)
 }
 
