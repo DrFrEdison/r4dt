@@ -1,20 +1,23 @@
 options(warn=-1)
 
+require(this.path)
+
 # working directory
 wd <- list()
-wd$here <- dt$R
+# wd$here <- this.dir()
+# setwd("..")
+# wd$here <- getwd()
 
 # commonly used paths in my working directory
-wd$scripts <- paste0(wd$here,"R/")
-wd$data <- paste0(wd$here,"data/")
-wd$output <- paste0(wd$here,"output/")
+# wd$scripts <- paste0(wd$here,"R/")
+# wd$data <- paste0(wd$here,"data/")
+# wd$output <- paste0(wd$here,"output/")
 
 # R user scripts
-wd$R.user <- paste0(substr(dt$R, 1, unlist(gregexpr("/", dt$R))[length(unlist(gregexpr("/", dt$R))) - 1]), "R/")
-wd$R.user.logs <- paste0(wd$R.user, "logs/")
+# wd$R.user <- paste0(substr(dt$R, 1, unlist(gregexpr("/", dt$R))[length(unlist(gregexpr("/", dt$R))) - 1]), "R/")
+# wd$R.user.logs <- paste0(wd$R.user, "logs/")
 
 # Entertain ####
-wd$entertain <- paste0(wd$here,"entertain/")
 
 # csvtemp und Desktop ####
 suppressMessages(suppressWarnings(library(fs, quietly = T)))
@@ -22,10 +25,10 @@ suppressMessages(suppressWarnings(library(data.table, quietly = T)))
 wd$csvtemp <- "C:/csvtemp"
 wd$desktop <- paste0(path_home(), "/Desktop/")
 # Model ####
-wd$model <- paste0(wd$here,"data/model/")
-wd$model$CCEP <- paste0(wd$model[1],"/CCEP/")
-wd$model$MEG <- paste0(wd$model[1],"/MEG/")
-wd$model$PepsiCo <- paste0(wd$model[1],"/PepsiCo/")
+# wd$model <- paste0(wd$here,"data/model/")
+# wd$model$CCEP <- paste0(wd$model[1],"/CCEP/")
+# wd$model$MEG <- paste0(wd$model[1],"/MEG/")
+# wd$model$PepsiCo <- paste0(wd$model[1],"/PepsiCo/")
 
 # F&E ####
 wd$fe <- paste0(Sys.getenv("OneDriveCommercial"), "/FE_Methoden/")
@@ -222,7 +225,7 @@ wd$servicebackup$CCEP$Genshagen$G6 <- paste0(wd$servicebackup$CCEP$Genshagen[1],
 wd$servicebackup$CCEP$Mannheim$MY <- paste0(wd$servicebackup$CCEP$Mannheim[1],"MY/")
 
 wd$servicebackup$CCEP$Moenchengladbach$G9 <- paste0(wd$servicebackup$CCEP$Moenchengladbach[1],"G9/")
-  
+
 wd$servicebackup$CCEP$Karlsruhe$BCANKD <- paste0(wd$servicebackup$CCEP$Karlsruhe[1],"BCANKD/")
 
 # MEG
@@ -303,6 +306,6 @@ wd$Hardware$ABInBev$GC_IMS_DT <- paste0(wd$Hardware$ABInBev, "03_Projektdokument
 
 options(warn=0)
 
-# customer and product ID ####  
-dt$customerlist <- read.csv2(paste0(wd$data,"dt_customer.csv"),sep="\t")
-dt$product_ID <- fread(paste0(wd$data,"dt_customer_product_ID.csv"))
+# customer and product ID ####
+# dt$customerlist <- read.csv2(paste0(wd$data,"dt_customer.csv"),sep="\t")
+# dt$product_ID <- fread(paste0(wd$data,"dt_customer_product_ID.csv"))
