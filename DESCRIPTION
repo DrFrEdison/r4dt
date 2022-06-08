@@ -11,3 +11,5 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/DrFrEdison/r4dt
 BugReports: https://github.com/DrFrEdison/r4dt/issues
+Depends: 
+    R (>= 2.10)
