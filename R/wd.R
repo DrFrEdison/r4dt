@@ -10,7 +10,6 @@ wd <- list()
 
 # commonly used paths in my working directory
 # wd$scripts <- paste0(wd$here,"R/")
-# wd$data <- paste0(wd$here,"data/")
 # wd$output <- paste0(wd$here,"output/")
 
 # R user scripts
@@ -25,13 +24,19 @@ suppressMessages(suppressWarnings(library(data.table, quietly = T)))
 wd$csvtemp <- "C:/csvtemp"
 wd$desktop <- paste0(path_home(), "/Desktop/")
 # Model ####
-# wd$model <- paste0(wd$here,"data/model/")
-# wd$model$CCEP <- paste0(wd$model[1],"/CCEP/")
-# wd$model$MEG <- paste0(wd$model[1],"/MEG/")
-# wd$model$PepsiCo <- paste0(wd$model[1],"/PepsiCo/")
 
 # F&E ####
 wd$fe <- paste0(Sys.getenv("OneDriveCommercial"), "/FE_Methoden/")
+
+# data ####
+wd$data <- paste0(wd$fe[1],"Allgemein/R/data")
+
+# model ####
+wd$model <- paste0(wd$data, "/model/")
+
+wd$model$CCEP <- paste0(wd$model[1],"/CCEP/")
+wd$model$MEG <- paste0(wd$model[1],"/MEG/")
+wd$model$PepsiCo <- paste0(wd$model[1],"/PepsiCo/")
 
 # SBC ####
 wd$SBC <- paste0(wd$fe[1],"Allgemein/SBC/")
