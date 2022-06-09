@@ -29,7 +29,7 @@ Depends:
     plotly,
     pls,
     plyr,
-	dplyr,
+    dplyr,
     png,
     prospectr,
     pspline,
