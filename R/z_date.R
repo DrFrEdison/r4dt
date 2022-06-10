@@ -9,5 +9,5 @@ time <- function(){
                   , substr(timep, (timep_frame[1] + 1) , (timep_frame[2] - 1))
                   , substr(timep, (timep_frame[2] + 1) , nchar(timep)))
 }
-datetime <- function() paste(.date(), .time(), sep = "_")
+datetime <- function() paste(date(), time(), sep = "_")
 
