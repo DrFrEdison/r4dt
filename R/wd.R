@@ -28,6 +28,9 @@ wd$desktop <- paste0(path_home(), "/Desktop/")
 # F&E ####
 wd$fe <- paste0(Sys.getenv("OneDriveCommercial"), "/FE_Methoden/")
 
+# Git ####
+wd$git <- paste0( wd$fe[[ 1 ]], "Allgemein/R_git")
+
 # data ####
 wd$data <- paste0(wd$fe[1],"Allgemein/R/data")
 
@@ -46,7 +49,7 @@ wd$fe$CCEP <- paste0(wd$fe[1],"BEV_CCEP/")
 wd$fe$ABInBev <- paste0(wd$fe[1],"BEV_ABInBev/")
 wd$fe$Krombacher <- paste0(wd$fe[1],"BEV_Krombacher/")
 wd$fe$MEG <- paste0(wd$fe[1],"BEV_MEG/")
-wd$fe$Pepsi <- paste0(wd$fe[1],"BEV_PepsiCo/")
+wd$fe$PepsiCo <- paste0(wd$fe[1],"BEV_PepsiCo/")
 
 # Einsatz
 wd$fe$Einsatz <- paste0(wd$fe[1],"Allgemein/Einsatz/")
@@ -110,10 +113,10 @@ wd$fe$MEG$Woerth$A6 <- paste0(wd$fe$MEG$Woerth[1],"P110680_LG2_A6/")
 
 wd$fe$MEG$Loeningen$BLT31_32 <- paste0(wd$fe$MEG$Loeningen[1],"P105160_BLT31_32/")
 
-# Pepsi
-wd$fe$Pepsi$Nieder_Roden <- paste0(wd$fe$Pepsi[1], "Nieder_Roden/P110160_L3_PET_CSD/")
-wd$fe$Pepsi$Mastermodelle <- paste0(wd$fe$Pepsi[1],"Mastermodelle/")
-wd$fe$Pepsi$Rezeptueberpruefung <- paste0(wd$fe$Pepsi[1],"Rezeptueberpruefung/")
+# PepsiCo
+wd$fe$PepsiCo$Nieder_Roden <- paste0(wd$fe$PepsiCo[1], "Nieder_Roden/P110160_L3_PET_CSD/")
+wd$fe$PepsiCo$Mastermodelle <- paste0(wd$fe$PepsiCo[1],"Mastermodelle/")
+wd$fe$PepsiCo$Rezeptueberpruefung <- paste0(wd$fe$PepsiCo[1],"Rezeptueberpruefung/")
 
 # ABInBev
 wd$fe$ABInBev$Leuven <- paste0(wd$fe$ABInBev[1],"Leuven/")
@@ -149,14 +152,14 @@ wd$bev.meg.basename <- list.dirs(wd$fe$MEG$Mastermodelle, full.names = F, recurs
 wd$fe$MEG$bev <- data.frame(t(wd$bev.meg))
 colnames(wd$fe$MEG$bev) <- wd$bev.meg.basename
 
-wd$bev.meg <- list.dirs(wd$fe$Pepsi$Mastermodelle, full.names = T, recursive = F)
-wd$bev.pepsi.basename <- list.dirs(wd$fe$Pepsi$Mastermodelle, full.names = F, recursive = F)
+wd$bev.meg <- list.dirs(wd$fe$PepsiCo$Mastermodelle, full.names = T, recursive = F)
+wd$bev.pepsico.basename <- list.dirs(wd$fe$PepsiCo$Mastermodelle, full.names = F, recursive = F)
 # wd$bev.pepsi <- wd$bev.pepsi[which(is.na(as.numeric(substr(wd$bev.pepsi.basename,1,1))))]
 # wd$bev.pepsi.basename <- wd$bev.pepsi.basename[which(is.na(as.numeric(substr(wd$bev.pepsi.basename,1,1))))]
 wd$bev.pepsi <- wd$bev.pepsi[!wd$bev.pepsi.basename %in% "Archiv"]
 wd$bev.pepsi.basename <- wd$bev.pepsi.basename[!wd$bev.pepsi.basename %in% "Archiv"]
-wd$fe$Pepsi$bev <- data.frame(t(wd$bev.pepsi))
-colnames(wd$fe$Pepsi$bev) <- wd$bev.pepsi.basename
+wd$fe$PepsiCo$bev <- data.frame(t(wd$bev.pepsi))
+colnames(wd$fe$PepsiCo$bev) <- wd$bev.pepsi.basename
 
 # Service ####
 wd$service <- paste0(Sys.getenv("OneDriveCommercial"), "/Service_neu/")
@@ -211,7 +214,7 @@ wd$servicebackup$unzip <- paste0(wd$servicebackup,"R/zip/")
 # customer
 wd$servicebackup$CCEP <- paste0(wd$servicebackup[1],"CCEP/")
 wd$servicebackup$MEG <- paste0(wd$servicebackup[1],"MEG/")
-wd$servicebackup$Pepsi <- paste0(wd$servicebackup[1],"PepsiCo/")
+wd$servicebackup$PepsiCo <- paste0(wd$servicebackup[1],"PepsiCo/")
 wd$servicebackup$CapriSun$Eppelheim <- paste0(wd$servicebackup[1],"CapriSun/Eppelheim/")
 
 wd$servicebackup$CCEP$Dorsten <- paste0(wd$servicebackup$CCEP[1],"DOR/")
@@ -247,9 +250,9 @@ wd$servicebackup$MEG$Loeningen$LG_LOE <- paste0(wd$servicebackup$MEG$Loeningen[1
 
 wd$servicebackup$MEG$Kirkel$A4 <- paste0(wd$servicebackup$MEG$Kirkel[1],"A4/")
 
-# Pepsi
-wd$servicebackup$Pepsi$Nieder_Roden <- paste0(wd$servicebackup$Pepsi, "Nieder_Roden/")
-wd$servicebackup$Pepsi$Nieder_Roden$L3_PET_CSD <- paste0(wd$servicebackup$Pepsi$Nieder_Roden[1], "L3_PET_CSD/")
+# PepsiCo
+wd$servicebackup$PepsiCo$Nieder_Roden <- paste0(wd$servicebackup$PepsiCo, "Nieder_Roden/")
+wd$servicebackup$PepsiCo$Nieder_Roden$L3_PET_CSD <- paste0(wd$servicebackup$PepsiCo$Nieder_Roden[1], "L3_PET_CSD/")
 
 # CapriSun
 wd$servicebackup$CapriSun$Eppelheim$TS1 <- paste0(wd$servicebackup$CapriSun$Eppelheim[[1]],"TS1/")
@@ -274,7 +277,7 @@ wd$wartung <- paste0(wd$ServiceBackup, "[Wartung]/")
 # customer
 wd$wartung$CCEP <- paste0(wd$wartung[1],"BEV_CCEP/")
 wd$wartung$MEG <- paste0(wd$wartung[1],"BEV_MEG/")
-wd$wartung$Pepsi <- paste0(wd$wartung[1],"BEV_PepsiCo/")
+wd$wartung$PepsiCo <- paste0(wd$wartung[1],"BEV_PepsiCo/")
 
 wd$wartung$CCEP$Dorsten <- paste0(wd$wartung$CCEP[1],"CCEP_DOR/")
 wd$wartung$CCEP$Genshagen <- paste0(wd$wartung$CCEP[1],"CCEP_GEN/")
@@ -287,8 +290,8 @@ wd$wartung$MEG$Woerth <- paste0(wd$wartung$MEG[1],"MEG_Woerth am Rhein/")
 wd$wartung$MEG$Kirkel <- paste0(wd$wartung$MEG[1],"MEG_Kirkel/")
 wd$wartung$MEG$Loeningen <- paste0(wd$wartung$MEG[1],"MEG_Loeningen/")
 
-# Pepsi
-wd$wartung$Pepsi$Nieder_Roden <- paste0(wd$wartung$Pepsi[1], "P110160_Pepsico_Nieder_Roden/")
+# PepsiCo
+wd$wartung$PepsiCo$Nieder_Roden <- paste0(wd$wartung$PepsiCo[1], "P110160_Pepsico_Nieder_Roden/")
 
 # CapriSun
 wd$wartung$CapriSun$Eppelheim <- paste0(wd$wartung[1], "BEV_CapriSun/")
