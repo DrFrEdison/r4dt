@@ -15,7 +15,7 @@ read.csv.SG <- function(customer,location,line,firstday,lastday,product=NA,expor
   if("spc" %in% typeof){
     # SPC ####
 
-    setwd(.service_backup_path(customer, location, line))
+    setwd(service_backup_path(customer, location, line))
     setwd("./spc")
 
     SPC$fileslist <- dir(pattern=".csv")[which(substr(dir(pattern=".csv"),1,10)>=firstday & substr(dir(pattern=".csv"),1,10)<=lastday)]
@@ -96,7 +96,7 @@ read.csv.SG <- function(customer,location,line,firstday,lastday,product=NA,expor
 
   if("drk" %in% typeof){
     # DW ####
-    setwd(.service_backup_path(customer, location, line))
+    setwd(service_backup_path(customer, location, line))
     setwd("./drk")
 
     DW$fileslist <- dir(pattern=".csv")[which(substr(dir(pattern=".csv"),1,10)>=firstday & substr(dir(pattern=".csv"),1,10)<=lastday)]
@@ -130,7 +130,7 @@ read.csv.SG <- function(customer,location,line,firstday,lastday,product=NA,expor
   }
   # REF ####
   if("ref" %in% typeof){
-    setwd(.service_backup_path(customer, location, line))
+    setwd(service_backup_path(customer, location, line))
     setwd("./ref")
 
     REF$fileslist <- dir(pattern=".csv")[which(substr(dir(pattern=".csv"),1,10)>=firstday & substr(dir(pattern=".csv"),1,10)<=lastday)]

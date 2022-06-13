@@ -5,7 +5,7 @@ produkt_per_day_year <- function(customer, location, line, LG, year, date = NA){
   
   for(k in 1:length(filep$year)){
     
-    setwd(.service_backup_path(customer, location, line))
+    setwd(service_backup_path(customer, location, line))
     
     setwd("./spc")
     filep$files <- dir(pattern = filep$year[k])
@@ -18,7 +18,7 @@ produkt_per_day_year <- function(customer, location, line, LG, year, date = NA){
     
     for(j in 1:length(filep$files)){
       
-      setwd(.service_backup_path(customer, location, line))
+      setwd(service_backup_path(customer, location, line))
       setwd("./spc")
       
       # codepages <- setNames(iconvlist(), iconvlist())
@@ -59,7 +59,7 @@ produkt_per_day_year <- function(customer, location, line, LG, year, date = NA){
         colnames(filep$export) <- c("Date", paste0("Produkt_", (ncol(filep$export) - 1)))
       }
       
-      setwd(.service_backup_path(customer, location, line))
+      setwd(service_backup_path(customer, location, line))
 
       filep$name <- paste0(paste(filep$year[k], customer, location, line, sep = "_"),".csv")
       

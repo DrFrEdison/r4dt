@@ -34,7 +34,7 @@ LG3_transform_SQL_update_to_csv <- function(csv_file,
 
   line <- as.character(unique(sql[[1]][ , 2]))
 
-  export_directory <- .service_backup_path(customer,location,line)
+  export_directory <- service_backup_path(customer,location,line)
 
   # rbind ####
   sql_raw <- rbindlist(sql)

@@ -33,7 +33,7 @@ customer.location.line.products <- function(customer, location, line, firstday, 
   suppressMessages(product_ID <- customer.location.line.productID(customer, location, line, product_ID))
 
   wd.o <- getwd()
-  setwd(.service_backup_path(customer, location, line))
+  setwd(service_backup_path(customer, location, line))
   line.product.date <- do.call(rbind, lapply(dir(pattern =  paste0(line,".csv")), read.csv2))
   line.product.date <- line.product.date[which(nchar(as.character(line.product.date$Date)) == 10),]
   line.product.date <- line.product.date[which(line.product.date$Date >= firstday & line.product.date$Date <= lastday) ,]

@@ -20,7 +20,7 @@ read.csv.LG2 <- function(customer
   read <- list()
 
   read$wd.o <- getwd()
-  read$wd <- .service_backup_path(customer, location, line)
+  read$wd <- service_backup_path(customer, location, line)
   setwd(read$wd)
 
   # name of export files

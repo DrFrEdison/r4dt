@@ -117,7 +117,7 @@ service_email_LG2 <- function(today, yesterday
     # message("delete all files except folders csv and spclog")
     
     # Move csv ####
-    lg2_service_email$export_path <- .service_backup_path(customer = systems$Kunde[i]
+    lg2_service_email$export_path <- service_backup_path(customer = systems$Kunde[i]
                                                           , location = systems$Standort[i]
                                                           , line = systems$Anlage[i])
     

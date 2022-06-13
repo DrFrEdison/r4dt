@@ -19,7 +19,7 @@ LG3_transform_SQL_to_csv <- function(csv_file,
 
   if(sqlquestion %in% c("dark","production","reference","mea")!=T) stop("No sqlquestion defined")
 
-  export_directory <- .service_backup_path(input$customer,input$location,input$unit)
+  export_directory <- service_backup_path(input$customer,input$location,input$unit)
   setwd(file_directory)
 
   # sql list
