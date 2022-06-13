@@ -16,7 +16,7 @@ drop_spc <- function(path = dirname(rstudioapi::getSourceEditorContext()$path), 
     if(length(writespc$spc_daten[[grep(writespc$export[i], names(writespc$spc_daten))]]) == 0) writespc$export[i] <- NA
     if(is.na(writespc$export[i])) next
 
-    namep <- paste0(.date(), "_", writespc$export[i])
+    namep <- paste0(date(), "_", writespc$export[i])
     if(all(writespc$export[i] == "au", !is.na(writespc$baseline))) namep <- paste0(date(), "_", writespc$export[i], "_bl")
 
     write_spc_files(spc_file = writespc$spc_daten[[grep(writespc$export[i], names(writespc$spc_daten))]]
