@@ -312,6 +312,9 @@ wd$Hardware$ABInBev$FlavourSpec <- paste0(wd$Hardware$ABInBev, "03_Projektdokume
 wd$Hardware$ABInBev$GC_IMS_GAS <- paste0(wd$Hardware$ABInBev, "03_Projektdokumentation/06_DDM/10_GC-IMS/04_Validierung_GAS_GC-IMS/")
 wd$Hardware$ABInBev$GC_IMS_DT <- paste0(wd$Hardware$ABInBev, "03_Projektdokumentation/06_DDM/10_GC-IMS/06_Validierung_ABInBev_GC-IMS_LD_Prozessversion/")
 
+wd$Innotop <- paste0(wd$Hardware[1], "P902780_FermentPAT/")
+wd$Innotop$AP2 <- paste0(wd$Hardware[1], "P902780_FermentPAT/Arbeitspakete/AP-02_Entscheidung_Entgasung_Filtration_Zentrifuge/")
+
 options(warn=0)
 
 # customer and product ID ####
