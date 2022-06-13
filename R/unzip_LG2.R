@@ -24,11 +24,11 @@ unzip.merge.LG2 <- function(year = year(Sys.Date())
   for(o in oo){
     if(o == 9) next
     # set wd ####
-    zip.dir <- paste0(.service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)),"ZIP/")
-    csv.dir <- paste0(.service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)),"CSV/")
-    ref.dir <- paste0(.service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)), "ref/")
-    drk.dir <- paste0(.service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)), "drk/")
-    spc.dir <- paste0(.service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)), "spc/")
+    zip.dir <- paste0(service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)),"ZIP/")
+    csv.dir <- paste0(service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)),"CSV/")
+    ref.dir <- paste0(service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)), "ref/")
+    drk.dir <- paste0(service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)), "drk/")
+    spc.dir <- paste0(service_backup_path(as.character(customerlist[o,]$customer), as.character(customerlist[o,]$location), as.character(customerlist[o,]$line)), "spc/")
 
     # List zip.files ####
     setwd(zip.dir)
