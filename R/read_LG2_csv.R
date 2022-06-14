@@ -64,8 +64,9 @@ read.csv.LG2 <- function(customer
 
   if(length(csvfiles$files)==0) stop(paste0("No production of ", read$name$product," (",product,") in the chosen timeframe!"))
 
-  csvfiles$dat <- lapply(csvfiles$files,function(x) fread(x,sep="\t",dec=",",header=F,encoding = "UTF-8",skip=1))
-  csvfiles$names <- mapply(function(x,y) scan(x,what="",sep="\t",y,quiet=T),x=csvfiles$files,y=lapply(csvfiles$dat,ncol))
+  csvfiles$dat <- lapply(csvfiles$files,function(x) fread(x,sep="\t",dec=",",header=F,encoding = "Latin-1",skip=1))
+  csvfiles$names <- mapply(function(x,y) scan(x,what="",sep="\t",y,quiet=T, encoding = "Latin-1"),x=csvfiles$files,y=lapply(csvfiles$dat,ncol))
+  csvfiles$names <- apply(csvfiles$names, 2, function(x) gsub( "\xfc", "ue", x))
 
   if(!is.list(csvfiles$names)){
     csvfiles$names1 <- list()
@@ -192,7 +193,7 @@ read.csv.LG2 <- function(customer
       if(!is.na(product)){spc$files <- spc$files[match(substr(csvfiles$files,1,10),substr(unlist(spc$files),1,10))]}
       spc$files <- sort(spc$files)
 
-      spc$merge <-  suppressWarnings(lapply(spc$files,function(x) fread(x, dec = ",", sep = ";")))
+      spc$merge <-  suppressWarnings(lapply(spc$files,function(x) fread(x, dec = ",", sep = ";", encoding = "Latin-1")))
 
       for(i in 1:length(spc$merge)){
         names(spc$merge[[i]])[grep("Produktn", names(spc$merge[[i]]))] <- "Produktnummer"
