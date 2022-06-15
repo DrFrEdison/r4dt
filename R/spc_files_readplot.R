@@ -31,7 +31,7 @@ read_spc_files <- function(directory,baseline=400,pngplot=T,plotlyplot=T,recursi
   spc$filestext <- gsub("TZO4611","",spc$filestext);spc$filestext <- gsub("TZO4612","",spc$filestext);spc$filestext <- gsub(".spc","",spc$filestext)
   spc$filestext <- gsub("__","_",spc$filestext);spc$filestext <- gsub("__","_",spc$filestext);spc$filestext <- gsub("__","_",spc$filestext)
 
-  suppressWarnings( if(!is.na(filestext)) spc$filestext <- filestext )
+  suppressWarnings( if(!is.na(filestext[1])) spc$filestext <- filestext )
 
   spc$files <- as.list(spc$files)
   try(

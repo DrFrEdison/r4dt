@@ -88,7 +88,7 @@ mtx_plot_spc <- function( dir
 
   filestext <- substr(basename( spc.files )
                       , unlist(gregexpr("_DT", basename( spc.files ), ignore.case = F)) + 8
-                      , unlist(gregexpr("_c01_", basename( spc.files ), ignore.case = F)) - 1)
+                      , unlist(gregexpr("01_00", basename( spc.files ), ignore.case = F)) - 3)
   filestext <- filestext [which(nchar(filestext) > 0)]
 
   spc_daten <-  read_spc_files(directory = dir
