@@ -86,6 +86,14 @@ mtx_plot_spc <- function( dir
   if( !is.na(parameter)) dir <- paste0( dir, "/", parameter)
   spc.files <- list.files(dir, pattern = ".spc$", recursive = recursive)
 
+  stop_quietly <- function() {
+    opt <- options(show.error.messages = FALSE)
+    on.exit(options(opt))
+    stop()
+  }
+
+  if( length(spc.files) == 0 ){ stop_quietly() }
+
   filestext <- substr(basename( spc.files )
                       , unlist(gregexpr("_DT", basename( spc.files ), ignore.case = F)) + 8
                       , unlist(gregexpr("01_00", basename( spc.files ), ignore.case = F)) - 3)
