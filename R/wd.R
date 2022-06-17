@@ -32,7 +32,7 @@ wd$fe <- paste0(Sys.getenv("OneDriveCommercial"), "/FE_Methoden/")
 wd$git <- paste0( wd$fe[[ 1 ]], "Allgemein/R_git")
 
 # data ####
-wd$data <- paste0(wd$fe[1],"Allgemein/R/data")
+wd$data <- paste0(wd$fe[1],"Allgemein/r4u/data")
 
 # model ####
 wd$model <- paste0(wd$data, "/model/")
