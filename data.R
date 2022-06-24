@@ -2,9 +2,10 @@ library(r4dt)
 dir(wd$data)
 dt_customer <- fread( paste0(wd$data, "/dt_customer.csv"))
 dt_customer_product_ID <- fread( paste0(wd$data, "/dt_customer_product_ID.csv"))
-
+dt_LG3_typecode <- fread( paste0(wd$data, "/dt_LG3_typecode.csv"))
 
 setwd(this.path::this.dir())
 setwd("./data")
 save(dt_customer, file =  "dt_customer.rda")
 save(dt_customer_product_ID, file =  "dt_customer_product_ID.rda")
+save(dt_LG3_typecode, file =  "dt_LG3_typecode.rda")
