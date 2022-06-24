@@ -10,7 +10,7 @@ read.csv.LG3 <- function(firstday
                          , typeof=c("drk","ref","spc")
                          , slim = T
                          , return.R = F
-                         , product_ID = dt$product_ID){
+                         , product_ID = dt_customer_product_ID){
 
   if(!is.na(product[1])){if(any(product[1] == 0) & location == "Mannheim") product <- "NULL"}
   if(slim == T) coltoremove <- c("lightPath", "ID", "transferFunctionCoef", "location", "unit"

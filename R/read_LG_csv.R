@@ -9,8 +9,8 @@ read.csv.LG <- function(firstday
                         , typeof=c("drk","ref","spc")
                         , slim = T
                         , return.R = F
-                        , product_ID = dt$product_ID
-                        , customer.list = dt$customerlist
+                        , product_ID = dt_customer_product_ID
+                        , customer.list = dt_customer
                         , export_directory="C://csvtemp"){
 
   rowp <- which( customer.list$customer == customer & customer.list$location == location & customer.list$line == line )
