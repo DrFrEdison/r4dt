@@ -80,8 +80,6 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
         , RMSE = unlist( pls_lm$pls_2ndRMSE )
         , R2 = unlist( pls_lm$pls_2ndR2 ))
 
-  pls_lm_summary2nd[ which( pls_lm_summary2nd$Slope == "0.7226040" ) , ]
-
   pls_lm_summary <- rbind(if("spc" %in% names(pls_function_obj)) pls_lm_summary
                           , if("spc1st" %in% names(pls_function_obj)) pls_lm_summary1st
                           , if("spc2nd" %in% names(pls_function_obj)) pls_lm_summary2nd)
