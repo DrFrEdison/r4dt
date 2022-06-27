@@ -66,7 +66,8 @@ read.csv.LG2 <- function(customer
 
   csvfiles$dat <- lapply(csvfiles$files,function(x) fread(x,sep="\t",dec=",",header=F,encoding = "Latin-1",skip=1))
   csvfiles$names <- mapply(function(x,y) scan(x,what="",sep="\t",y,quiet=T, encoding = "Latin-1"),x=csvfiles$files,y=lapply(csvfiles$dat,ncol))
-  csvfiles$names <- apply(csvfiles$names, 2, function(x) gsub( "\xfc", "ue", x))
+  csvfiles$names <- lapply(csvfiles$names, function(x) gsub( "\xfc", "ue", x))
+  csvfiles$names <- lapply(csvfiles$names, function(x) gsub( "\xe4", "ae", x))
 
   if(!is.list(csvfiles$names)){
     csvfiles$names1 <- list()
