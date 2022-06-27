@@ -20,15 +20,15 @@ ma.date <- function(x, time, diff.time.max = 1200, n = 5){
 
   for(i in 1:length(diff.time.seq)){
 
-    if(i == 1)  x.ma[  1:diff.time.seq[i] ] <- as.numeric( ma( dat1$co2[ 1:diff.time.seq[i] ],
+    if(i == 1)  x.ma[  1:diff.time.seq[i] ] <- as.numeric( ma( x[ 1:diff.time.seq[i] ],
                                                                ifelse(length( 1:diff.time.seq[i] ) > n, n, length(( 1:diff.time.seq[i] ))) ))
 
     if(i > 1 & i < length(diff.time.seq)){
-      x.ma[  (diff.time.seq[ i-1 ] + 1) :diff.time.seq[i] ] <- as.numeric( ma( dat1$co2[ (diff.time.seq[ i-1 ] + 1) :diff.time.seq[i] ]
+      x.ma[  (diff.time.seq[ i-1 ] + 1) :diff.time.seq[i] ] <- as.numeric( ma( x[ (diff.time.seq[ i-1 ] + 1) :diff.time.seq[i] ]
                                                                                , ifelse(length((diff.time.seq[ i-1 ] + 1) :diff.time.seq[i] ) > n, n, length((diff.time.seq[ i-1 ] + 1) :diff.time.seq[i] ))) )
     }
 
-    if(i == length(diff.time.seq)) x.ma[  (diff.time.seq[ i ] + 1) : diff.time.seq[ i ] ] <- as.numeric( ma( dat1$co2[ (diff.time.seq[ i ] + 1) : diff.time.seq[ i ] ],
+    if(i == length(diff.time.seq)) x.ma[  (diff.time.seq[ i ] + 1) : diff.time.seq[ i ] ] <- as.numeric( ma( x[ (diff.time.seq[ i ] + 1) : diff.time.seq[ i ] ],
                                                                                                              ifelse( length((diff.time.seq[ i ] + 1) : diff.time.seq[ i ]) > n, n, length((diff.time.seq[ i ] + 1) : diff.time.seq[ i ]))) )
   }
 
