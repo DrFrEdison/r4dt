@@ -2,10 +2,11 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
 
   originalwd <- getwd()
   require(readODS)
-  setwd(unlist(wd$model)[1])
+  setwd(unlist(wd$data)[1])
   model_overview <-  read_ods("dt_model_overview.ods")
 
-  if(parameter == "Koffein") parameter <- "Coffein"
+  if(parameter == "Coffein") parameter <- "offein"
+  if(parameter == "Koffein") parameter <- "offein"
   model_overviewp <- model_overview[model_overview$customer==customer & model_overview$beverage==beverage & model_overview$LG==LG & model_overview$Parameter==parameter,]
 
   if(nrow(model_overviewp)) model_overviewp <- model_overviewp[1,]
@@ -35,9 +36,9 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
   names(dat)[1] <- "ID"
 
   dat <- transfer_csv(dat,
-                       p = ifelse(is.na(model_overviewp$p), 2, model_overviewp$p),
-                       n1 = ifelse(is.na(model_overviewp$n1), 7, model_overviewp$n1),
-                       n2 = ifelse(is.na(model_overviewp$n2), 11, model_overviewp$n2))
+                       p = ifelse(is.na(model_overviewp$n1) | model_overviewp$n1 == 0, 2, model_overviewp$p),
+                       n1 = ifelse(is.na(model_overviewp$n1) | model_overviewp$n1 == 0, 7, model_overviewp$n1),
+                       n2 = ifelse(is.na(model_overviewp$n1) | model_overviewp$n1 == 0, 11, model_overviewp$n2))
   matrixtochoose <- NA
   whichnot <- NA
   substance <- parameter
