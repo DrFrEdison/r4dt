@@ -7,7 +7,11 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
 
   if(parameter == "Coffein") parameter <- "offein"
   if(parameter == "Koffein") parameter <- "offein"
-  model_overviewp <- model_overview[model_overview$customer==customer & model_overview$beverage==beverage & model_overview$LG==LG & model_overview$Parameter==parameter,]
+
+  rowp <- which(model_overview$customer %in% customer & model_overview$beverage %in% beverage & model_overview$LG %in% LG)
+  rowp <- rowp[ rowp %in% grep(parameter, model_overview$Parameter) ]
+
+  model_overviewp <- model_overview[rowp,]
 
   if(nrow(model_overviewp)) model_overviewp <- model_overviewp[1,]
 
@@ -26,7 +30,8 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
   # if(length(grep("offein",parameter))>0){
   #   if(length(grep(parameter,names(dat)))==0) colnump <- names(dat)[grep(gsub("C","K",parameter),names(dat))]  else colnump <- names(dat)[grep(parameter,names(dat))]} else colnump <- names(dat)[grep(parameter,names(dat))]
 
-  colnumpp <- which(names(dat)==parameter)
+
+  colnumpp <- grep(parameter, names(dat))
   setDF(dat)
 
   if(!is.na(model_overviewp$subset)) dat <- dat[eval(parse(text=paste0("c(",gsub("-",":",as.character(model_overviewp$subset)),")"))),]
