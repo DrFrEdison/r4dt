@@ -21,7 +21,7 @@ keep.out.unsb <- function(model, wl1, wl2, wl3, wl4){
     keepout.5 <- min(which(model$wl > wl4)) + ncolp
   }
 
-  if(ttt){
+  if(!ttt){
     keepout.5 <- min(which(model$wl > wl2)) + ncolp
   }
 
