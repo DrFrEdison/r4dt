@@ -185,7 +185,7 @@ read.csv.LG2 <- function(customer
 
   # spc ####
   if(any(grepl( "spc", typeof, fixed = TRUE))){
-      gc()
+      # gc()
       setwd(read$wd)
       setwd("./spc")
 
@@ -239,7 +239,7 @@ read.csv.LG2 <- function(customer
       # move wl to last columns if necessary
       if(is.na(as.numeric(gsub("X", "", names(spc$merge)[ncol(spc$merge)])))){
         suppressWarnings(spc$wl <- sort(as.numeric(gsub("X","",names(spc$merge)))))
-        for(i in paste0("X", spc$wl)) spc$merge <- spc$merge[ , moveme(names(spc$merge), paste(i, "last")), with = F]}
+        for(i in paste0("X", spc$wl)) suppressMessages(spc$merge <- spc$merge[ , moveme(names(spc$merge), paste(i, "last")), with = F])}
 
     if(length(which(!(spc$merge$datetime %in% csvfiles$rbind$Zeitstempel) == T))>0)  spc$merge <- spc$merge[ - which(!(spc$merge$datetime %in% csvfiles$rbind$Zeitstempel) == T),]
     spc$merge <- merge.data.frame(csvfiles$rbind,spc$merge,by.x="Zeitstempel",by.y="datetime")
@@ -275,7 +275,7 @@ read.csv.LG2 <- function(customer
   }
 
   if(!is.na(export_directory))  message(paste("Export of .csv files to",export_directory, "finished"))
-  gc()
+  # gc()
   if(!is.na(export_directory)) setwd(export_directory)
 
   if(return.R){
