@@ -65,7 +65,10 @@ read.csv.LG2 <- function(customer
   if(length(csvfiles$files)==0) stop(paste0("No production of ", read$name$product," (",product,") in the chosen timeframe!"))
 
   csvfiles$dat <- lapply(csvfiles$files,function(x) fread(x,sep="\t",dec=",",header=F,encoding = "Latin-1",skip=1))
-  csvfiles$names <- mapply(function(x,y) scan(x,what="",sep="\t",y,quiet=T, encoding = "Latin-1"),x=csvfiles$files,y=lapply(csvfiles$dat,ncol))
+  csvfiles$names <- mapply(function(x,y) scan(x,what="",sep="\t",y,quiet=T, encoding = "Latin-1")
+                           , x = csvfiles$files
+                           , y = lapply(csvfiles$dat,ncol)
+                           , SIMPLIFY = F)
   csvfiles$names <- lapply(csvfiles$names, function(x) gsub( "\xfc", "ue", x))
   csvfiles$names <- lapply(csvfiles$names, function(x) gsub( "\xe4", "ae", x))
 
