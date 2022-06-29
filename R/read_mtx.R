@@ -6,9 +6,15 @@ mtx_add <- function(qxxmtx, coltoremove = c("X1", "X2"), sheet = "Zugabe_p"){
 
   qxxmtx <- lapply(qxxmtx, function(x) x[ , c(rangep, which( apply( x[ , -c(rangep) ], 2, function(y) sum(y, na.rm = T)) != 0) + max( rangep ))])
 
-  qxxmtx <- do.call(cbind, qxxmtx)
+  if(length(qxxmtx) > 1){
+    qxxmtx <- do.call(cbind, qxxmtx)
+    lp = T} else{
+      qxxmtx <- qxxmtx[[ 1 ]]
+      lp = F
+    }
 
-  qxxmtxcol <- qxxmtx[ , names( qxxmtx ) %in% c( coltoremove)][ , 1:(ncol(qxxmtx[ , names( qxxmtx ) %in% c( coltoremove)]) / 2)]
+  if(lp) qxxmtxcol <- qxxmtx[ , names( qxxmtx ) %in% c( coltoremove)][ , 1:(ncol(qxxmtx[ , names( qxxmtx ) %in% c( coltoremove)]) / 2)]
+  if(!lp) qxxmtxcol <- qxxmtx[ , names( qxxmtx ) %in% c( coltoremove)][ , 1:(ncol(qxxmtx[ , names( qxxmtx ) %in% c( coltoremove)]))]
 
   qxxmtx <- qxxmtx[ , !names( qxxmtx ) %in% c( coltoremove)]
 
