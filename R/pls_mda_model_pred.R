@@ -39,7 +39,7 @@ pls.model.customer <- function(customer, beverage, LG, parameter, alpha = .05, g
 
   model.wl <- sort(unique(c(model.para$wl1:model.para$wl2, model.para$wl3, model.para$wl4)))
 
-  model.pls <- mdatools::pls(model.trs[[  grep(model.para$transform, names(model.trs))[1] ]][ , colnames(model.trs[[  grep(model.para$transform, names(model.trs))[1] ]]) %in% paste0("X", model.wl)]
+  model.pls <- mdatools::pls(model.trs[[  grep(model.para$spc, names(model.trs))[1] ]][ , colnames(model.trs[[  grep(model.para$spc, names(model.trs))[1] ]]) %in% paste0("X", model.wl)]
                              , model.trs$data[ , model.col.y]
                              , ncomp = model.para$ncomp
                              , cv = 5
@@ -48,7 +48,7 @@ pls.model.customer <- function(customer, beverage, LG, parameter, alpha = .05, g
 
   raw.spc <- raw.spc[ , raw.numcol$numcol, with = F]
 
-  if(model.para$transform == "1st"){
+  if(model.para$spc == "1st"){
     raw.spc <- raw.spc[ , savitzkyGolay(.SD
                                         , m = 1
                                         , p = ifelse(is.na(model.para$p), 2, model.para$p)
@@ -56,7 +56,7 @@ pls.model.customer <- function(customer, beverage, LG, parameter, alpha = .05, g
     raw.spc <- data.table(raw.spc)
   }
 
-  if(model.para$transform == "2nd"){
+  if(model.para$spc == "2nd"){
     raw.spc <- raw.spc[ , savitzkyGolay(.SD
                                         , m = 2
                                         , p = ifelse(is.na(model.para$p), 2, model.para$p)

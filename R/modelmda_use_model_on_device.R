@@ -46,7 +46,7 @@ use_modelmda_on_device <- function(customer, beverage, LG, parameter, csv_transf
   if(!is.na(model_overviewp$wl3))   wlr <- data.frame(wl1=model_overviewp$wl1,wl2=model_overviewp$wl2,wl3=model_overviewp$wl3,wl42=model_overviewp$wl4)
 
   ncomp <- model_overviewp$ncomp
-  derivative <- as.character(model_overviewp$transform)
+  derivative <- as.character(model_overviewp$spc)
   namecolumn <- "ID"
 
   pls_function_obj <- pls_function.mda(csv_transfered = dat, substance = substance, wlr = wlr,ncomp = ncomp, spc = derivative, alpha = alpha)
@@ -80,7 +80,7 @@ use_modelmda_on_device <- function(customer, beverage, LG, parameter, csv_transf
                 , "wl3 =", model_overviewp$wl3
                 , "wl4 =", model_overviewp$wl4
                 , "PC =", model_overviewp$ncomp
-                , "derivative =", model_overviewp$transform))
+                , "derivative =", model_overviewp$spc))
   return(model)
 }
 
