@@ -11,7 +11,7 @@ pls.model.customer <- function(customer, beverage, LG, parameter, alpha = .05, g
   if(parameter == "Koffein") parameter <- "Coffein"
 
   # Find model parameter
-  model.para <- model.overview[model.overview$customer==customer & model.overview$beverage==beverage & model.overview$LG==LG & model.overview$Parameter==parameter,][1,]
+  model.para <- model.overview[model.overview$customer==customer & model.overview$beverage==beverage & model.overview$LG==LG & model.overview$substance==parameter,][1,]
 
   # Find model csv ####
   setwd(paste0(setwd(unlist(wd$model)[1]),"/",model.para$customer))

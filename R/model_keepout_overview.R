@@ -9,7 +9,7 @@ keep.out.unsb.model <- function(customer, beverage, LG, parameter){
   if(parameter == "Koffein") parameter <- "offein"
 
   rowp <- which(model_overview$customer %in% customer & model_overview$beverage %in% beverage & model_overview$LG %in% LG)
-  rowp <- rowp[ rowp %in% grep(parameter, model_overview$Parameter) ]
+  rowp <- rowp[ rowp %in% grep(parameter, model_overview$substance) ]
 
   model_overviewp <- model_overview[rowp,]
 
@@ -30,7 +30,7 @@ keep.out.unsb.model <- function(customer, beverage, LG, parameter){
   dat <- transfer_csv(dat)
 
   dat.keep.out <- keep.out.unsb(model = dat, wl1 = model_overviewp$wl1, wl2= model_overviewp$wl2, wl3 = model_overviewp$wl3, wl4 = model_overviewp$wl4)
-  dat.para <- data.frame(customer = model_overviewp$customer, beverage = model_overviewp$beverage, parameter = model_overviewp$Parameter, ncomp = model_overviewp$PC, spc = model_overviewp$transform
+  dat.para <- data.frame(customer = model_overviewp$customer, beverage = model_overviewp$beverage, parameter = model_overviewp$substance, ncomp = model_overviewp$PC, spc = model_overviewp$transform
                          , wl1 = model_overviewp$wl1, wl2= model_overviewp$wl2, wl3 = model_overviewp$wl3, wl4 = model_overviewp$wl4)
 
   return(list(dat.keep.out, dat.para))

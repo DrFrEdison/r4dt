@@ -7,7 +7,7 @@ use_modelmda_on_device <- function(customer, beverage, LG, parameter, csv_transf
   model_overview <-  read_ods("dt_model_overview.ods")
 
   if(parameter == "Koffein") parameter <- "Coffein"
-  model_overviewp <- model_overview[model_overview$customer==customer & model_overview$beverage==beverage & model_overview$LG==LG & model_overview$Parameter==parameter,]
+  model_overviewp <- model_overview[model_overview$customer==customer & model_overview$beverage==beverage & model_overview$LG==LG & model_overview$substance==parameter,]
 
   if(nrow(model_overviewp)) model_overviewp <- model_overviewp[1,]
 
@@ -74,7 +74,7 @@ use_modelmda_on_device <- function(customer, beverage, LG, parameter, csv_transf
   model$val$model <- data.frame(Q = model$model$Qlim[1,ncomp], T2 = model$model$T2lim[1,ncomp])
   model$val$val <- data.frame(Q = model$predpara$Q[,ncomp], T2 = model$predpara$T2[,ncomp])
 
-  message(paste("Parameter =", model_overviewp$Parameter
+  message(paste("Parameter =", model_overviewp$substance
                 , "wl1 =", model_overviewp$wl1
                 , "wl2 =", model_overviewp$wl2
                 , "wl3 =", model_overviewp$wl3

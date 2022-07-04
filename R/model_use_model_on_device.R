@@ -9,7 +9,7 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
   if(parameter == "Koffein") parameter <- "offein"
 
   rowp <- which(model_overview$customer %in% customer & model_overview$beverage %in% beverage & model_overview$LG %in% LG)
-  rowp <- rowp[ rowp %in% grep(parameter, model_overview$Parameter) ]
+  rowp <- rowp[ rowp %in% grep(parameter, model_overview$substance) ]
 
   model_overviewp <- model_overview[rowp,]
 
@@ -66,7 +66,7 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
 
   prediction_final <- pred_of_model(prediction, model_overviewp$wl1, model_overviewp$wl2, model_overviewp$wl3, model_overviewp$wl4, ncomp, derivative)
 
-  message(paste("Parameter =", model_overviewp$Parameter
+  message(paste("Parameter =", model_overviewp$substance
                 , "wl1 =", model_overviewp$wl1
                 , "wl2 =", model_overviewp$wl2
                 , "wl3 =", model_overviewp$wl3
