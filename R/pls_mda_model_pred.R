@@ -41,7 +41,7 @@ pls.model.customer <- function(customer, beverage, LG, parameter, alpha = .05, g
 
   model.pls <- mdatools::pls(model.trs[[  grep(model.para$transform, names(model.trs))[1] ]][ , colnames(model.trs[[  grep(model.para$transform, names(model.trs))[1] ]]) %in% paste0("X", model.wl)]
                              , model.trs$data[ , model.col.y]
-                             , ncomp = model.para$PC
+                             , ncomp = model.para$ncomp
                              , cv = 5
                              , alpha = alpha
                              , gamma = gamma)
@@ -69,20 +69,20 @@ pls.model.customer <- function(customer, beverage, LG, parameter, alpha = .05, g
 
   pred.pls <- predict(model.pls
                       , raw.spc
-                      , ncomp = model.para$PC)
+                      , ncomp = model.para$ncomp)
 
   model <- list()
   model$model <- model.pls
   model$predpara <- pred.pls$xdecomp
-  model$pred <- as.numeric(pred.pls$y.pred[ , model.para$PC, ])
+  model$pred <- as.numeric(pred.pls$y.pred[ , model.para$ncomp, ])
   model$csv <- model.csv
   model$name <- model.filename
   model$para <- model.para
   if(is.na(model$para$wl3)) model$wl <- c(model$para$wl1 : model$para$wl2)
   if(!is.na(model$para$wl3)) model$wl <- c(model$para$wl1 : model$para$wl2, model$para$wl3 : model$para$wl4)
 
-  model$val$model <- data.frame(Q = model$model$Qlim[1,model.para$PC], T2 = model$model$T2lim[1,model.para$PC])
-  model$val$val <- data.frame(Q = model$predpara$Q[,model.para$PC], T2 = model$predpara$T2[,model.para$PC])
+  model$val$model <- data.frame(Q = model$model$Qlim[1,model.para$ncomp], T2 = model$model$T2lim[1,model.para$ncomp])
+  model$val$val <- data.frame(Q = model$predpara$Q[,model.para$ncomp], T2 = model$predpara$T2[,model.para$ncomp])
 
   return(model)
 }

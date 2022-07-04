@@ -30,7 +30,7 @@ keep.out.unsb.model <- function(customer, beverage, LG, parameter){
   dat <- transfer_csv(dat)
 
   dat.keep.out <- keep.out.unsb(model = dat, wl1 = model_overviewp$wl1, wl2= model_overviewp$wl2, wl3 = model_overviewp$wl3, wl4 = model_overviewp$wl4)
-  dat.para <- data.frame(customer = model_overviewp$customer, beverage = model_overviewp$beverage, parameter = model_overviewp$substance, ncomp = model_overviewp$PC, spc = model_overviewp$transform
+  dat.para <- data.frame(customer = model_overviewp$customer, beverage = model_overviewp$beverage, parameter = model_overviewp$substance, ncomp = model_overviewp$ncomp, spc = model_overviewp$transform
                          , wl1 = model_overviewp$wl1, wl2= model_overviewp$wl2, wl3 = model_overviewp$wl3, wl4 = model_overviewp$wl4)
 
   return(list(dat.keep.out, dat.para))
