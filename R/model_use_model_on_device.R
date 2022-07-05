@@ -2,7 +2,7 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
 
   originalwd <- getwd()
   require(readODS)
-  setwd(unlist(wd$data)[1])
+  setwd(unlist(r4dt::wd$data)[1])
   model_overview <-  read_ods("dt_model_overview.ods")
 
   if(parameter == "Coffein") parameter <- "offein"
