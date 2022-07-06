@@ -23,7 +23,7 @@ customer.location.line.productID <- function(customer, location, line, product_I
   if(nchar(unique(product_ID$line)[1]) != 0)   product_ID <- product_ID[product_ID$line == line,]
   product_ID <- product_ID[ ,c("beverage", "ID", "ID2", "ID3")]
 
-  product_ID <- product_ID[ , c(T, !is.na(apply(product_ID[ , -1], 2, sum)))]
+  product_ID <- product_ID[ , c(apply(product_ID, 2, function( x ) !all( is.na( x ))))]
   message("List with product IDs in ", location, ", line ", line )
   return(product_ID)
 }
