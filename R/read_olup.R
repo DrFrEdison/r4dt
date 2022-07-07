@@ -43,8 +43,8 @@ read_olup <- function(olup_raw, ncomp = NA, show_else = F, write = F){
     olup$leverages <- olup$leverages * olup$tothepower
   }
 
-  if(!show_else) olup$return <- data.frame( ncomp = olup$ncomp, Y_Pred = olup$ypred )
-  if(show_else) olup$return <- data.frame( ncomp = olup$ncomp, Y_Pred = olup$ypred, Scores = olup$scores, Leverages = olup$leverages )
+  if(!show_else) olup$return <- data.frame(Software = "OLUP", ncomp = olup$ncomp, Y_Pred = olup$ypred )
+  if(show_else) olup$return <- data.frame(Software = "OLUP", ncomp = olup$ncomp, Y_Pred = olup$ypred, Scores = olup$scores, Leverages = olup$leverages )
 
   if( write ) write.csv2(olup$return, paste0(date(), "_Olup_Prediction.csv"), row.names = F)
   return(  olup$return )
