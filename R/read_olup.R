@@ -3,15 +3,18 @@ read_olup <- function(olup_raw, ncomp = NA, show_else = F, write = F){
   olup <- list()
   olup$raw <- olup_raw
 
-  if( length( grep("Plane", olup_raw) ) == 0 ) stop("Copy and Paste from OLUP did not work")
+  if( length( grep("Y-Predicted", olup_raw) ) == 0 ) stop("Copy and Paste from OLUP did not work")
 
-  olup$Plane <- max( as.numeric( unique( substr( olup$raw[ unlist( grep("Plane", olup$raw) ) ] , 7, 7))))
+  if( length( grep("Plane", olup$raw) ) == 0) olup$Plane <- 0
+  if( length( grep("Plane", olup$raw) ) > 0) olup$Plane <- max( as.numeric( unique( substr( olup$raw[ unlist( grep("Plane", olup$raw) ) ] , 7, 7))))
 
   if( !is.na( ncomp )) olup$ncomp <- ncomp
   if( !is.na( ncomp )) olup$Plane <- olup$ncomp - 1
   if( is.na( ncomp )) olup$ncomp <- olup$Plane + 1
 
-  olup$ypred <- olup$raw[ grep( paste0( "Plane ", olup$Plane), olup$raw) ]
+  if( olup$Plane != 0)  olup$ypred <- olup$raw[ grep( paste0( "Plane ", olup$Plane), olup$raw) ]
+
+  if( olup$Plane == 0)  olup$ypred <- olup$raw[ grep( "Y-Predicted ", olup$raw) + 1 ]
 
   if( length( olup$ypred) == 0) stop("Wrong Principal Components chosen")
 
