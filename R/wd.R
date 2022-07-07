@@ -167,6 +167,7 @@ wd$service <- paste0(Sys.getenv("OneDriveCommercial"), "/Service_neu/")
 # customer
 wd$service$CCEP <- paste0(wd$service[1],"BEV_CCEP/")
 wd$service$MEG <- paste0(wd$service[1],"BEV_MEG/")
+wd$service$PepsiCo <- paste0(wd$service[1],"BEV_PepsiCo/")
 
 # CCEP #
 wd$service$CCEP$Dorsten <- paste0(wd$service$CCEP[1],"CCEP_DOR/")
@@ -201,6 +202,11 @@ wd$service$MEG$Loeningen$BLT31_32 <- paste0(wd$service$MEG$Loeningen[1],"P105160
 wd$service$MEG$Loeningen$LG <- paste0(wd$service$MEG$Loeningen[1],"P110060_LiquiGuard/")
 
 wd$service$MEG$Kirkel$LG <- paste0(wd$service$MEG$Kirkel[1],"P111060_KEG_Linie 4/")
+
+# PepsiCo
+wd$service$PepsiCo$Nieder_Roden <- paste0(wd$service$PepsiCo[1],"P110160_LiquiGuard_PepsiCo_Nieder_Roden/")
+
+wd$service$PepsiCo$Nieder_Roden$L3_PET_CSD <- paste0(wd$service$PepsiCo[1],"P110160_LiquiGuard_PepsiCo_Nieder_Roden/")
 
 # ServiceBackup ####
 wd$ServiceBackup2 <- "//DC-01/Datenverzeichnis_2/ServiceBackup/"
