@@ -17,7 +17,7 @@ read_olup <- function(olup_raw, ncomp = NA, show_else = F, write = F){
 
   olup$ypred <- gsub( paste0("Plane ", olup$Plane, ":\t"), "", olup$ypred)
 
-  olup$tothepower <- 10 * as.numeric( substr(olup$ypred, lapply( gregexpr( "e", olup$ypred), function( x ) min( x ) + 2), nchar(olup$ypred)) )
+  olup$tothepower <- 10 ^ as.numeric( substr(olup$ypred, lapply( gregexpr( "e", olup$ypred), function( x ) min( x ) + 2), nchar(olup$ypred)) )
 
   olup$ypred <- as.numeric( substr(olup$ypred, 1, lapply( gregexpr( "e", olup$ypred), function( x ) min( x ) - 1)))
 
