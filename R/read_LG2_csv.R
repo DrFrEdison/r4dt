@@ -35,6 +35,8 @@ read.csv.LG2 <- function(customer
 
   read$name$file <- paste(read$name$date1, read$name$date2, location, line, read$name$product, paste(product, collapse = "_"), sep = "_")
   read$name$file <- gsub("__", "_", read$name$file)
+  read$name$file <- gsub(" ", "_", read$name$file)
+
   if(is.na(product)) read$name$file <- paste(read$name$date1, read$name$date2, location, line, sep = "_")
   # csv files ####
   csvfiles <- list()
@@ -130,116 +132,118 @@ read.csv.LG2 <- function(customer
     if(slim == T) ref$merge$time <- NULL
 
     if(!is.na(export_directory)){
-    # write
-    setwd(export_directory)
-    fwrite(x = ref$merge, file = paste0(read$name$file,"_ref.csv"), sep = ";", dec = ",")
-    message("Reference Spectra exported")}
+      # write
+      setwd(export_directory)
+      colnames( ref$merge ) <- gsub( "X", "", colnames( ref$merge ))
+      fwrite(x = ref$merge, file = paste0(read$name$file,"_ref.csv"), sep = ";", dec = ",")
+      message("Reference Spectra exported")}
   }
 
   # Dark Spectra ####
   if(any(grepl( "drk", typeof, fixed = TRUE))){
 
-      setwd(read$wd)
-      setwd("./drk")
-      drk <- list()
+    setwd(read$wd)
+    setwd("./drk")
+    drk <- list()
 
-      # list drk files
-      drk$files <- dir(pattern = "_drk.csv")[which(substr(dir(pattern = "_drk.csv"), 1, 10)>=firstday & substr(dir(pattern = "_drk.csv"), 1, 10)<=lastday)]
+    # list drk files
+    drk$files <- dir(pattern = "_drk.csv")[which(substr(dir(pattern = "_drk.csv"), 1, 10)>=firstday & substr(dir(pattern = "_drk.csv"), 1, 10)<=lastday)]
 
-      # match csv and drk files by date
-      if(!is.na(product)){drk$files <- drk$files[match(substr(csvfiles$files,1,10),substr(unlist(drk$files),1,10))]}
-      drk$files <- sort(drk$files )
-      # read drk files
-      drk$merge <- lapply(drk$files,function(x) fread(x, dec = ",", sep = ";"))
+    # match csv and drk files by date
+    if(!is.na(product)){drk$files <- drk$files[match(substr(csvfiles$files,1,10),substr(unlist(drk$files),1,10))]}
+    drk$files <- sort(drk$files )
+    # read drk files
+    drk$merge <- lapply(drk$files,function(x) fread(x, dec = ",", sep = ";"))
 
-      #zerotime
-      zerotime <- which(do.call(rbind,lapply(drk$merge,function(x) ifelse(length(grep("00-00-00",x[1,"time"]))==0,0,1)))==1)
-      drk$datetime <- lapply(drk$merge, function(x) as.POSIXct(as.character(x[1,"datetime"]),format="%Y-%m-%d_%H-%M-%S",tz="UTC"))
-      if(length(zerotime)>0){
-        for(i in 1:length(zerotime))
-          drk$datetime[[zerotime[i]]] <- format(round(drk$datetime[[zerotime[i]]],units="days"),"%Y-%m-%d %M:%H:%S")}
+    #zerotime
+    zerotime <- which(do.call(rbind,lapply(drk$merge,function(x) ifelse(length(grep("00-00-00",x[1,"time"]))==0,0,1)))==1)
+    drk$datetime <- lapply(drk$merge, function(x) as.POSIXct(as.character(x[1,"datetime"]),format="%Y-%m-%d_%H-%M-%S",tz="UTC"))
+    if(length(zerotime)>0){
+      for(i in 1:length(zerotime))
+        drk$datetime[[zerotime[i]]] <- format(round(drk$datetime[[zerotime[i]]],units="days"),"%Y-%m-%d %M:%H:%S")}
 
-      # merge
-      drk$merge <- rbindlist(drk$merge, fill = T)
+    # merge
+    drk$merge <- rbindlist(drk$merge, fill = T)
 
-      # datetime
-      drk$merge$date <- as.Date(as.POSIXct(as.character(drk$merge$date),format="%Y-%m-%d",tz="UTC"))
-      drk$merge$datetime <- as.POSIXct(as.character(drk$merge$datetime),format="%Y-%m-%d %H:%M:%S",tz="UTC")
+    # datetime
+    drk$merge$date <- as.Date(as.POSIXct(as.character(drk$merge$date),format="%Y-%m-%d",tz="UTC"))
+    drk$merge$datetime <- as.POSIXct(as.character(drk$merge$datetime),format="%Y-%m-%d %H:%M:%S",tz="UTC")
 
-      # order columns
-      if(is.na(as.numeric(gsub("X", "", names(drk$merge)[ncol(drk$merge)])))){
-        suppressWarnings(drk$wl <- sort(as.numeric(gsub("X","",names(drk$merge)))))
-        for(i in paste0("X", drk$wl)) drk$merge <- drk$merge[ , moveme(names(drk$merge), paste(i, "last")), with = F]}
+    # order columns
+    if(is.na(as.numeric(gsub("X", "", names(drk$merge)[ncol(drk$merge)])))){
+      suppressWarnings(drk$wl <- sort(as.numeric(gsub("X","",names(drk$merge)))))
+      for(i in paste0("X", drk$wl)) drk$merge <- drk$merge[ , moveme(names(drk$merge), paste(i, "last")), with = F]}
 
-      # slim data
-      if(slim == T) drk$merge <- drk$merge[ , names(drk$merge)[-unique(unlist(lapply(coltoremove, function(x) grep(x, names(drk$merge)))))], with = F]
-      if(slim == T) drk$merge$date <- NULL
-      if(slim == T) drk$merge$time <- NULL
+    # slim data
+    if(slim == T) drk$merge <- drk$merge[ , names(drk$merge)[-unique(unlist(lapply(coltoremove, function(x) grep(x, names(drk$merge)))))], with = F]
+    if(slim == T) drk$merge$date <- NULL
+    if(slim == T) drk$merge$time <- NULL
 
-      if(!is.na(export_directory)){
+    if(!is.na(export_directory)){
       # write
       setwd(export_directory)
+      colnames( drk$merge ) <- gsub( "X", "", colnames( drk$merge ))
       fwrite(x = drk$merge, file = paste0(read$name$file,"_drk.csv"), sep = ";", dec = ",")
       message("Dark Spectra exported")}
-    }
+  }
 
   # spc ####
   if(any(grepl( "spc", typeof, fixed = TRUE))){
-      # gc()
-      setwd(read$wd)
-      setwd("./spc")
+    # gc()
+    setwd(read$wd)
+    setwd("./spc")
 
-      spc <- list()
+    spc <- list()
 
-      # list spc files
-      spc$files <- dir(pattern = "_spc.csv")[which(substr(dir(pattern = "_spc.csv"), 1, 10)>=firstday & substr(dir(pattern = "_spc.csv"), 1, 10)<=lastday)]
+    # list spc files
+    spc$files <- dir(pattern = "_spc.csv")[which(substr(dir(pattern = "_spc.csv"), 1, 10)>=firstday & substr(dir(pattern = "_spc.csv"), 1, 10)<=lastday)]
 
-      if(!is.na(product)){spc$files <- spc$files[match(substr(csvfiles$files,1,10),substr(unlist(spc$files),1,10))]}
-      spc$files <- sort(spc$files)
+    if(!is.na(product)){spc$files <- spc$files[match(substr(csvfiles$files,1,10),substr(unlist(spc$files),1,10))]}
+    spc$files <- sort(spc$files)
 
-      spc$merge <-  suppressWarnings(lapply(spc$files,function(x) fread(x, dec = ",", sep = ";", encoding = "Latin-1")))
+    spc$merge <-  suppressWarnings(lapply(spc$files,function(x) fread(x, dec = ",", sep = ";", encoding = "Latin-1")))
 
-      for(i in 1:length(spc$merge)){
-        names(spc$merge[[i]])[grep("Produktn", names(spc$merge[[i]]))] <- "Produktnummer"
+    for(i in 1:length(spc$merge)){
+      names(spc$merge[[i]])[grep("Produktn", names(spc$merge[[i]]))] <- "Produktnummer"
+    }
+
+    # German Acid name Problem äöüß
+    for(i in 1:length(spc$merge)){
+      find_acid <- grep("ure.",names(spc$merge[[i]]))
+      names_acid <- names(spc$merge[[i]])[find_acid]
+
+      if( sum(unlist(lapply(gregexpr("\\.", names_acid), min))) < 0 ){
+        names_acid <- paste0("Sae", substr(names_acid, 3, nchar(names_acid)))
+        names(spc$merge[[i]])[find_acid] <- names_acid
       }
 
-      # German Acid name Problem äöüß
-      for(i in 1:length(spc$merge)){
-        find_acid <- grep("ure.",names(spc$merge[[i]]))
-        names_acid <- names(spc$merge[[i]])[find_acid]
-
-        if( sum(unlist(lapply(gregexpr("\\.", names_acid), min))) < 0 ){
-          names_acid <- paste0("Sae", substr(names_acid, 3, nchar(names_acid)))
-          names(spc$merge[[i]])[find_acid] <- names_acid
-          }
-
-        if( sum(unlist(lapply(gregexpr("\\.", names_acid), min))) > 0 ){
-          names_acid1 <- substr(names_acid, 1, unlist(lapply(gregexpr("\\.", names_acid), min))-1)
-          names_acid2 <- substr(names_acid, unlist(lapply(gregexpr("_", names_acid), max)), nchar(names_acid))
+      if( sum(unlist(lapply(gregexpr("\\.", names_acid), min))) > 0 ){
+        names_acid1 <- substr(names_acid, 1, unlist(lapply(gregexpr("\\.", names_acid), min))-1)
+        names_acid2 <- substr(names_acid, unlist(lapply(gregexpr("_", names_acid), max)), nchar(names_acid))
 
         names(spc$merge[[i]])[find_acid] <- gsub("SaeureSaeure", "Saeure", gsub("\\.","",paste(names_acid1, names_acid2, sep = ".")))}
-      }
+    }
 
-      # filter by product
-      if(!is.na(product)) spc$merge <- lapply(spc$merge, function(x) x[x$Produktnummer %in% product , ])
+    # filter by product
+    if(!is.na(product)) spc$merge <- lapply(spc$merge, function(x) x[x$Produktnummer %in% product , ])
 
-      # zerotime
-      zerotime <- which(do.call(rbind,lapply(spc$merge,function(x) ifelse(length(grep("00-00-00",x[1,"time"]))==0,0,1)))==1)
-      spc$merge.time <- lapply(spc$merge, function(x) as.POSIXct(as.character(x[1,"datetime"]),format="%Y-%m-%d %H:%M:%S",tz="UTC"))
-      if(length(zerotime)>0){
-        for(i in 1:length(zerotime))
-          spc$merge.time[[zerotime[i]]] <- format(round(spc$merge.time[[zerotime[i]]],units="days"),"%Y-%m-%d %M:%H:%S")}
+    # zerotime
+    zerotime <- which(do.call(rbind,lapply(spc$merge,function(x) ifelse(length(grep("00-00-00",x[1,"time"]))==0,0,1)))==1)
+    spc$merge.time <- lapply(spc$merge, function(x) as.POSIXct(as.character(x[1,"datetime"]),format="%Y-%m-%d %H:%M:%S",tz="UTC"))
+    if(length(zerotime)>0){
+      for(i in 1:length(zerotime))
+        spc$merge.time[[zerotime[i]]] <- format(round(spc$merge.time[[zerotime[i]]],units="days"),"%Y-%m-%d %M:%H:%S")}
 
-      # merge
-      spc$merge <- rbindlist(spc$merge, fill = T)
+    # merge
+    spc$merge <- rbindlist(spc$merge, fill = T)
 
-      if(slim == F) spc$merge$date <- as.Date(as.POSIXct(as.character(spc$merge$date),format="%Y-%m-%d",tz="UTC"))
-      spc$merge$datetime <- as.character(spc$merge$datetime)
+    if(slim == F) spc$merge$date <- as.Date(as.POSIXct(as.character(spc$merge$date),format="%Y-%m-%d",tz="UTC"))
+    spc$merge$datetime <- as.character(spc$merge$datetime)
 
-      # move wl to last columns if necessary
-      if(is.na(as.numeric(gsub("X", "", names(spc$merge)[ncol(spc$merge)])))){
-        suppressWarnings(spc$wl <- sort(as.numeric(gsub("X","",names(spc$merge)))))
-        for(i in paste0("X", spc$wl)) suppressMessages(spc$merge <- spc$merge[ , moveme(names(spc$merge), paste(i, "last")), with = F])}
+    # move wl to last columns if necessary
+    if(is.na(as.numeric(gsub("X", "", names(spc$merge)[ncol(spc$merge)])))){
+      suppressWarnings(spc$wl <- sort(as.numeric(gsub("X","",names(spc$merge)))))
+      for(i in paste0("X", spc$wl)) suppressMessages(spc$merge <- spc$merge[ , moveme(names(spc$merge), paste(i, "last")), with = F])}
 
     if(length(which(!(spc$merge$datetime %in% csvfiles$rbind$Zeitstempel) == T))>0)  spc$merge <- spc$merge[ - which(!(spc$merge$datetime %in% csvfiles$rbind$Zeitstempel) == T),]
     spc$merge <- merge.data.frame(csvfiles$rbind,spc$merge,by.x="Zeitstempel",by.y="datetime")
@@ -268,10 +272,12 @@ read.csv.LG2 <- function(customer
     if(slim == T) spc$merge$time <- NULL
 
     if(!is.na(export_directory)){
-    # write
-    setwd(export_directory)
-    fwrite(x = spc$merge, file = paste0(read$name$file,"_spc.csv"), sep = ";", dec = ",")
-    message("Production Spectra exported")}
+      # write
+      setwd(export_directory)
+
+      colnames( spc$merge ) <- gsub( "X", "", colnames( spc$merge ))
+      fwrite(x = spc$merge, file = paste0(read$name$file,"_spc.csv"), sep = ";", dec = ",")
+      message("Production Spectra exported")}
   }
 
   if(!is.na(export_directory))  message(paste("Export of .csv files to",export_directory, "finished"))

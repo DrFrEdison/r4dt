@@ -38,6 +38,8 @@ read.csv.LG3 <- function(firstday
   read$name$product <- unique(product_ID$beverage[which(product_ID$ID==product[1])])
 
   read$name$file <- paste(read$name$date1, read$name$date2, location, line, read$name$product, paste(product, collapse = "_"), sep = "_")
+  read$name$file <- gsub("__", "_", read$name$file)
+  read$name$file <- gsub(" ", "_", read$name$file)
 
   # get production df for each day
   if(!is.na(product[1])){
@@ -86,10 +88,11 @@ read.csv.LG3 <- function(firstday
     if(slim == T) ref$merge$time <- NULL
 
     if(!is.na(export_directory)){
-    setwd(export_directory)
+      setwd(export_directory)
 
-    fwrite(x = ref$merge, file = paste0(read$name$file,"_ref.csv"), sep = ";", dec = ",", na = "NA")
-    message("Reference Spectra exported")}
+      colnames( ref$merge ) <- gsub( "X", "", colnames( ref$merge ))
+      fwrite(x = ref$merge, file = paste0(read$name$file,"_ref.csv"), sep = ";", dec = ",", na = "NA")
+      message("Reference Spectra exported")}
     if(!return.R)  rm(ref)
   }
 
@@ -127,10 +130,11 @@ read.csv.LG3 <- function(firstday
     if(slim == T) drk$merge$time <- NULL
 
     if(!is.na(export_directory)){
-          setwd(export_directory)
+      setwd(export_directory)
 
-    fwrite(x = drk$merge, file = paste0(read$name$file,"_drk.csv"), sep = ";", dec = ",", na = "NA")
-    message("Dark Spectra exported")}
+      colnames( drk$merge ) <- gsub( "X", "", colnames( drk$merge ))
+      fwrite(x = drk$merge, file = paste0(read$name$file,"_drk.csv"), sep = ";", dec = ",", na = "NA")
+      message("Dark Spectra exported")}
     if(!return.R)  rm(drk)
   }
 
@@ -180,8 +184,9 @@ read.csv.LG3 <- function(firstday
     setwd(export_directory)
 
     if(!is.na(export_directory)){
+      colnames( spc$merge ) <- gsub( "X", "", colnames( spc$merge ))
       fwrite(x = spc$merge, file = paste0(read$name$file,"_spc.csv"), sep = ";", dec = ",", na = "NA", dateTimeAs = "ISO")
-    message("Production Spectra exported")}
+      message("Production Spectra exported")}
   }
 
   if(!is.na(export_directory)) message(paste("Export of .csv files to",export_directory, "finished"))
