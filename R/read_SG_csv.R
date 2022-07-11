@@ -221,9 +221,9 @@ read.csv.SG <- function(customer,location,line,firstday,lastday,product=NA,expor
   if("drk" %in% typeof) colnames( DW$datrbind ) <- gsub( "X", "", colnames( DW$datrbind ))
   if("ref" %in% typeof) colnames( REF$datrbind ) <- gsub( "X", "", colnames( REF$datrbind ))
 
-  if("spc" %in% typeof) write.csv2(SPC$merge,gsub("-","",paste0(substr(firstday,3,nchar(firstday)),"_",substr(lastday,3,nchar(lastday)),"_",location,"_",line,"_",gsub(" ", "_", gsub("%","p",dt$product),"_spc.csv"))), row.names = F)
-  if("drk" %in% typeof) write.csv2(DW$datrbind,gsub("-","",paste0(substr(firstday,3,nchar(firstday)),"_",substr(lastday,3,nchar(lastday)),"_",location,"_",line,"_",gsub(" ", "_", gsub("%","p",dt$product),"_drk.csv"))), row.names = F)
-  if("ref" %in% typeof) write.csv2(REF$datrbind,gsub("-","",paste0(substr(firstday,3,nchar(firstday)),"_",substr(lastday,3,nchar(lastday)),"_",location,"_",line,"_",gsub(" ", "_", gsub("%","p",dt$product),"_ref.csv"))), row.names = F)
+  if("spc" %in% typeof) write.csv2(SPC$merge,gsub("-","",paste0(substr(firstday,3,nchar(firstday)),"_",substr(lastday,3,nchar(lastday)),"_",location,"_",line,"_",gsub(" ", "_", gsub("%","p",dt$product)),"_spc.csv")), row.names = F)
+  if("drk" %in% typeof) write.csv2(DW$datrbind,gsub("-","",paste0(substr(firstday,3,nchar(firstday)),"_",substr(lastday,3,nchar(lastday)),"_",location,"_",line,"_",gsub(" ", "_", gsub("%","p",dt$product)),"_drk.csv")), row.names = F)
+  if("ref" %in% typeof) write.csv2(REF$datrbind,gsub("-","",paste0(substr(firstday,3,nchar(firstday)),"_",substr(lastday,3,nchar(lastday)),"_",location,"_",line,"_",gsub(" ", "_", gsub("%","p",dt$product)),"_ref.csv")), row.names = F)
 
   exportlist <- list()
   if("ref" %in% typeof) exportlist$ref <- REF$datrbind
