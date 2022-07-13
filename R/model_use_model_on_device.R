@@ -1,4 +1,4 @@
-use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfered, return_type = "prediction"){
+use_model_on_device1 <- function(customer, beverage, LG, parameter, csv_transfered, return_type = "prediction"){
 
   originalwd <- getwd()
   require(readODS)
@@ -57,7 +57,7 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
   pls_function_obj <- pls_function(csv_transfered = dat, substance = substance, wlr = wlr,ncomp = ncomp, spc = derivative)
 
   if(return_type == "prediction"){
-  pls_lm <- pls_lm_function(pls_function_obj = pls_function_obj, csv_transfered = dat, wlr = wlr, ncomp = ncomp)
+
 
   setwd(setwd(unlist(wd$model)[1]))
   setwd(originalwd)
@@ -77,11 +77,15 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
   setwd(originalwd)
   if(return_type == "prediction") return(prediction_final)
   if(return_type == "model"){
+
+    pls_lm <- pls_lm_function(pls_function_obj = pls_function_obj, csv_transfered = dat, wlr = wlr, ncomp = ncomp)
+
     model <- list()
     model$model <- pls_function_obj$pls[[1]]
     model$csv <- dat
     model$name <- txtlist
     model$para <- model_overviewp
+    model$lm <- pls_lm
     if(is.na(model$para$wl3)) model$wl <- c(model$para$wl1 : model$para$wl2)
     if(!is.na(model$para$wl3)) model$wl <- c(model$para$wl1 : model$para$wl2, model$para$wl3 : model$para$wl4)
 
