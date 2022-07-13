@@ -79,6 +79,7 @@ use_model_on_device1 <- function(customer, beverage, LG, parameter, csv_transfer
   if(return_type == "model"){
 
     pls_lm <- pls_lm_function(pls_function_obj = pls_function_obj, csv_transfered = dat, wlr = wlr, ncomp = ncomp)
+    pls_lm <- pls_lm[ nrow(pls_lm) , ]
 
     model <- list()
     model$model <- pls_function_obj$pls[[1]]
