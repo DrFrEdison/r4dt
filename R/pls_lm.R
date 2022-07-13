@@ -34,7 +34,7 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
     if("spc" %in% names(pls_function_obj)){
       pls_lm$spc[[j]] <- lapply(pls_function_obj$spc, function(x) lm(x$fitted.values[,,j] ~ x$model$`pls$x`))
       pls_lm$plsRMSE[[j]] <- lapply(pls_function_obj$spc, function(x) RMSEP(x,estimate="train")$val[,,j+1])
-      pls_lm$pls_slope[[j]] <- lapply(pls_lm$spc[[j]], function(x) coef(x)[2])
+   #   pls_lm$pls_slope[[j]] <- lapply(pls_lm$spc[[j]], function(x) coef(x)[2])
       pls_lm$plsR2[[j]] <- lapply(pls_lm$spc[[j]], function(x) summary(x)$r.squared)
       pls_lm$ncomp[[j]] <- rep(j, length(pls_lm$spc[[j]]))
     }
@@ -42,7 +42,7 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
     if("spc1st" %in% names(pls_function_obj)){
       pls_lm$spc1st[[j]] <- lapply(pls_function_obj$spc1st, function(x) lm(x$fitted.values[,,j] ~ x$model$`pls$x`))
       pls_lm$pls_1stRMSE[[j]] <- lapply(pls_function_obj$spc1st, function(x) RMSEP(x,estimate="train")$val[,,j+1])
-      pls_lm$pls_1stslope[[j]] <- lapply(pls_lm$spc1st[[j]], function(x) coef(x)[2])
+   #   pls_lm$pls_1stslope[[j]] <- lapply(pls_lm$spc1st[[j]], function(x) coef(x)[2])
       pls_lm$pls_1stR2[[j]] <- lapply(pls_lm$spc1st[[j]], function(x) summary(x)$r.squared)
       pls_lm$ncomp_1st[[j]] <- rep(j, length(pls_lm$spc1st[[j]]))
     }
@@ -50,7 +50,7 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
     if("spc2nd" %in% names(pls_function_obj)){
       pls_lm$spc2nd[[j]] <- lapply(pls_function_obj$spc2nd, function(x) lm(x$fitted.values[,,j] ~ x$model$`pls$x`))
       pls_lm$pls_2ndRMSE[[j]] <- lapply(pls_function_obj$spc2nd, function(x) RMSEP(x,estimate="train")$val[,,j+1])
-      pls_lm$pls_2ndslope[[j]] <- lapply(pls_lm$spc2nd[[j]], function(x) coef(x)[2])
+   #   pls_lm$pls_2ndslope[[j]] <- lapply(pls_lm$spc2nd[[j]], function(x) coef(x)[2])
       pls_lm$pls_2ndR2[[j]] <- lapply(pls_lm$spc2nd[[j]], function(x) summary(x)$r.squared)
       pls_lm$ncomp_2nd[[j]] <- rep(j, length(pls_lm$spc2nd[[j]]))
     }
@@ -60,7 +60,7 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
     pls_lm_summary <- cbind(ncomp = unlist( pls_lm$ncomp )
                                , wlr
                                , spc = "spc"
-                               , Slope = unlist( pls_lm$pls_slope )
+                  #             , Slope = unlist( pls_lm$pls_slope )
                                , RMSE = unlist( pls_lm$plsRMSE )
                                , R2 = unlist( pls_lm$plsR2 ))
 
@@ -68,7 +68,7 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
     pls_lm_summary1st <- cbind(ncomp = unlist( pls_lm$ncomp_1st )
                                , wlr
                                , spc = "1st"
-                               , Slope = unlist( pls_lm$pls_1stslope )
+                   #            , Slope = unlist( pls_lm$pls_1stslope )
                                , RMSE = unlist( pls_lm$pls_1stRMSE )
                                , R2 = unlist( pls_lm$pls_1stR2 ))
 
@@ -76,7 +76,7 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
     pls_lm_summary2nd <- cbind(ncomp = unlist( pls_lm$ncomp_2nd )
         , wlr
         , spc = "2nd"
-        , Slope = unlist( pls_lm$pls_2ndslope )
+    #    , Slope = unlist( pls_lm$pls_2ndslope )
         , RMSE = unlist( pls_lm$pls_2ndRMSE )
         , R2 = unlist( pls_lm$pls_2ndR2 ))
 
@@ -85,9 +85,9 @@ pls_lm_function <- function(pls_function_obj,csv_transfered,substance,wlr,ncomp)
                           , if("spc2nd" %in% names(pls_function_obj)) pls_lm_summary2nd)
 
   rownames(pls_lm_summary) <- 1:nrow(pls_lm_summary)
-  pls_lm_summary$slope <- round(pls_lm_summary$Slope,3)
+  # pls_lm_summary$slope <- round(pls_lm_summary$Slope,3)
   pls_lm_summary$R2 <- round(pls_lm_summary$R2,3)
-  pls_lm_summary$RMSE <- round(pls_lm_summary$RMSE,2)
+  pls_lm_summary$RMSE <- round(pls_lm_summary$RMSE,3)
 
   return(pls_lm_summary)
 }
