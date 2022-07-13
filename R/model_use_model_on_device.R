@@ -36,14 +36,14 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
 
   if(!is.na(model_overviewp$subset)) dat <- dat[eval(parse(text=paste0("c(",gsub("-",":",as.character(model_overviewp$subset)),")"))),]
 
-  dat <- dat[,!is.na(colnumpp)]
+  dat <- dat[!is.na(dat[ , colnumpp]), ]
   names(dat)[colnumpp] <- parameter
   names(dat)[1] <- "ID"
 
-  dat <- transfer_csv(dat,
-                       p = ifelse(is.na(model_overviewp$n1) | model_overviewp$n1 == 0, 2, model_overviewp$p),
+  dat <- transfer_csv(csv.file = dat,
+                       p = ifelse(is.na(model_overviewp$p) | model_overviewp$p == 0, 2, model_overviewp$p),
                        n1 = ifelse(is.na(model_overviewp$n1) | model_overviewp$n1 == 0, 7, model_overviewp$n1),
-                       n2 = ifelse(is.na(model_overviewp$n1) | model_overviewp$n1 == 0, 11, model_overviewp$n2))
+                       n2 = ifelse(is.na(model_overviewp$n2) | model_overviewp$n2 == 0, 11, model_overviewp$n2))
   matrixtochoose <- NA
   whichnot <- NA
   substance <- parameter

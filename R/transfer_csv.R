@@ -32,7 +32,7 @@ transfer_csv <- function(csv.file # input csv file
   if(any(grepl( "datetime" , names(csv.file.data), fixed = TRUE))) if(unlist(gregexpr("T", substr(csv.file.data$datetime[1], 1, 19)))>0) csv.file.data$datetime <- as.POSIXct(strptime(csv.file.data$datetime, "%Y-%m-%dT%H:%M:%S") )
   if(any(grepl( "datetime" , names(csv.file.data), fixed = TRUE))) csv.file.data$datetime <- as.POSIXct(csv.file.data$datetime, format = "%Y-%m-%d %H:%M:%S", tz = tz)
   if(any(grepl( "date" , names(csv.file.data), fixed = TRUE))) csv.file.data$date <- as.POSIXct(csv.file.data$date, format = "%Y-%m-%d", tz = tz)
-  if(any(grepl( "time" , names(csv.file.data), fixed = TRUE))){
+  if(any(grepl( "datetime" , names(csv.file.data), fixed = TRUE))){
 
     csv.file.data$time <- strftime(csv.file.data$datetime, format="%H:%M:%S")
   }
