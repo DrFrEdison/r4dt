@@ -78,7 +78,7 @@ use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfere
   if(return_type == "prediction") return(prediction_final)
   if(return_type == "model"){
     model <- list()
-    model$model <- pls_function_obj[[1]][[1]]
+    model$model <- pls_function_obj$pls[[1]]
     model$csv <- dat
     model$name <- txtlist
     model$para <- model_overviewp
