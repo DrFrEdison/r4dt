@@ -1,4 +1,4 @@
-use_model_on_device1 <- function(customer, beverage, LG, parameter, csv_transfered, return_type = "prediction"){
+use_model_on_device <- function(customer, beverage, LG, parameter, csv_transfered, return_type = "prediction"){
 
   originalwd <- getwd()
   require(readODS)
