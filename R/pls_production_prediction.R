@@ -27,6 +27,9 @@ produktion_prediction <- function(csv_transfered,pls_function_obj,ncomp,messaget
   wlr$wl3[which(wlr$wl3 == "")] <- NA
   wlr$wl4[which(wlr$wl4 == "")] <- NA
 
+  wlr$wl3[which(wlr$wl3 == "0_0")] <- NA
+  wlr$wl4[which(wlr$wl4 == "0_0")] <- NA
+
   wlrl <- apply(wlr, 1, function(x) c(x[1]:x[2], if(!is.na(x[3])) x[3]:x[4]))
   ifelse(nrow(wlr) > 1
          , wlrlp <- lapply(wlrl, function(x) which(csv_transfered$wl %in% x))
