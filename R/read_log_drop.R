@@ -1,4 +1,4 @@
-drop_log <- function(path = dirname(rstudioapi::getSourceEditorContext()$path), recursive = T, type = "spc", SG = F){
+drop_log <- function(path = dirname(rstudioapi::getSourceEditorContext()$path), recursive = T, type = c("spc", "ref", "drk"), SG = F){
   writelog <- list()
 
   if( type == "spc")  writelog$spc <- dir( path = path, pattern = "M.log")
