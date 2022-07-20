@@ -34,7 +34,7 @@
 ### Version 01
 ### Date = 2022-02-02
 
-match.Lab.LG1 <- function(daytime.Lab # Vector of Lab day and time in a POSIXct format. Timezone must be specified by tizo, standard is "UTC (see last function term)
+match.Lab.LG <- function(daytime.Lab # Vector of Lab day and time in a POSIXct format. Timezone must be specified by tizo, standard is "UTC (see last function term)
                          , daytime.LG # Vector of LG day and time in a POSIXct format. Timezone must be specified by tizo, standard is "UTC" (see last function term)
                          , value.Lab # Vector of Lab values
                          , value.LG # Vector of LG values
@@ -112,7 +112,10 @@ match.Lab.LG1 <- function(daytime.Lab # Vector of Lab day and time in a POSIXct 
   dat$frame.LG.lab$difftime <- as.numeric(as.POSIXct(dat$frame.LG.lab$Lab.time, tz = tizo) - as.POSIXct(dat$frame.LG.lab$LG.time, tz = tizo))
 
   dat$frame.LG.lab <- dat$frame.LG.lab[ dat$frame.LG.lab$difftime <= time.diff + time.range & dat$frame.LG.lab$difftime >= time.diff - time.range , ]
-  dat$frame.LG.lab <- dat$frame.LG.lab[ !is.na( dat$frame.LG.lab$LG.time ) , ]
+  dat$frame.LG.lab$Lab.time <- daytime.Lab
+  dat$frame.LG.lab$Lab.value <- value.Lab
+
+  # dat$frame.LG.lab <- dat$frame.LG.lab[ !is.na( dat$frame.LG.lab$LG.time ) , ]
 
   # create export data for validation table according to FO-223
   dat$frame.val <- data.frame(NR = 1:length(daytime.LG)
@@ -140,7 +143,7 @@ match.Lab.LG1 <- function(daytime.Lab # Vector of Lab day and time in a POSIXct 
   dat$frame.LG.lab$diff.Lab.LG <- dat$frame.LG.lab$Lab.value - dat$frame.LG.lab$LG.value.c
 
   # sd between difference between Lab and LG
-  dat$sd.Lab.LG <- sd(dat$frame.val$Lab - dat$frame.val$LG, na.rm = T)
+  dat$sd.Lab.LG <- sd(sort(dat$frame.val$Lab - dat$frame.val$LG))
 
   # include missing LG data into val table
   dat$frame.missing.LG <- dat$frame.LG.lab[is.na(dat$frame.LG.lab$LG.time) , c("Lab.time", "LG.value", "Lab.value")]
@@ -154,6 +157,10 @@ match.Lab.LG1 <- function(daytime.Lab # Vector of Lab day and time in a POSIXct 
 
   dat$frame.val <- rbind.fill(dat$frame.val, dat$frame.missing.LG) # rbind.fill using plyr
   dat$frame.val <- dat$frame.val[order(dat$frame.val$Datetime) , ] # order by date
+  dat$frame.val <- dat$frame.val[ - which( is.na( dat$frame.val$LG ) & is.na( dat$frame.val$Lab ) ) , ]
+  dat$frame.val <- cbind(dat$frame.val, package = NA)
+  dat$frame.val <- dat$frame.val[ , moveme( colnames( dat$frame.val ), "NR Datum Uhrzeit package first")]
+
   dat$frame.val$NR <- 1:nrow(dat$frame.val) # new NR column
 
   # final shape of return data
